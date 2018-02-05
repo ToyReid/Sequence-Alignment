@@ -1,7 +1,4 @@
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <cstdio>
+#include "align.hpp"
 using namespace std;
 
 enum Alignment {unknown = 0, global, local, endgapfree};
@@ -18,7 +15,7 @@ enum Alignment {unknown = 0, global, local, endgapfree};
 
 int main(int argc, char **argv) {
     string file1, file2, align;
-    ifstream gen1, gen2;
+    ifstream fasta1, fasta2;
     int match, mismatch, gap;
     Alignment a;
 
@@ -44,8 +41,8 @@ int main(int argc, char **argv) {
     while(1) {
         cout << "First .fasta filename: ";
         cin >> file1;
-        gen1.open(file1);
-        if(!gen1) fprintf(stderr, "\t%s NOT OPENED. Please try again.\n", file1.c_str());
+        fasta1.open(file1);
+        if(!fasta1) fprintf(stderr, "\t%s NOT OPENED. Please try again.\n", file1.c_str());
         else {
             printf("\t%s OPENED\n", file1.c_str());
             break;
@@ -55,8 +52,8 @@ int main(int argc, char **argv) {
     while(1) {
         cout << "Second .fasta filename: ";
         cin >> file2;
-        gen2.open(file2);
-        if(!gen2) fprintf(stderr, "\t%s NOT OPENED. Please try again.\n", file2.c_str());
+        fasta2.open(file2);
+        if(!fasta2) fprintf(stderr, "\t%s NOT OPENED. Please try again.\n", file2.c_str());
         else {
             printf("\t%s OPENED\n", file2.c_str());
             break;
@@ -68,6 +65,11 @@ int main(int argc, char **argv) {
     
     printf("\nComputing the %s alignment of %s and %s.\n\tMatch = %d, Mismatch = %d, Gap = %d\n",
         align.c_str(), file1.c_str(), file2.c_str(), match, mismatch, gap);
+
+    if(a == global) {
+        Global g = Global::Global(fasta1, fasta2, match, mismatch, gap);
+    }
+
     
     return 0;
 }
