@@ -53,16 +53,17 @@ int main(int argc, char **argv) {
     cout << "Please enter scoring parameters (space delimited) for\nMatch Mismatch Gap: ";
     cin >> match >> mismatch >> gap;
     
-    printf("\nComputing the %s alignment of %s and %s.\n\tMatch = %d, Mismatch = %d, Gap = %d\n",
+    printf("\nComputing the %s alignment of %s and %s.\n\tMatch = %d, Mismatch = %d, Gap = %d\n\n",
         align.c_str(), file1.c_str(), file2.c_str(), match, mismatch, gap);
 
     if(a == global) {
         Global g;
         g.Init(fasta1, fasta2, match, mismatch, gap);
         g.SetupMatrix();
-        g.PrintMatrix();
-        g.ComputeScore();
-        g.PrintMatrix();
+        //g.PrintMatrix();
+        g.DoAlignment();
+        g.PrintAlignment();
+        //g.PrintMatrix();
     }
 
     

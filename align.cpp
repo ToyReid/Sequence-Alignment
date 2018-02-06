@@ -1,6 +1,9 @@
 #include "align.hpp"
 using namespace std;
 
+Align::Align(){}
+Align::~Align(){}
+
 int Align::Max(int m, int gapl, int gapu) {
     int max;
 
@@ -45,8 +48,8 @@ void Align::ReadSequences(ifstream &fasta1, ifstream &fasta2) {
         }
     }
 
-    g1size = gen1.size() - 1;
-    g2size = gen2.size() - 1;
+    g1size = gen1.size();
+    g2size = gen2.size();
 }
 
 void Align::PrintMatrix() {
@@ -60,4 +63,29 @@ void Align::PrintMatrix() {
         printf("\n");
     }
     printf("\n");
+}
+
+void Align::PrintAlignment() {
+    int i, j;
+    int size = gen1align.size();
+
+    printf("size = %d\n", gen1align.size() % LINE_LENGTH);
+
+    for(i = 0; i < (size / LINE_LENGTH) + 1; i++) {
+        for(j = i * LINE_LENGTH; j < i * LINE_LENGTH + LINE_LENGTH; j++) {
+            if(j >= size) break;
+            printf("%c", gen1align[j]);
+        }
+        printf("\n");
+        for(j = i * LINE_LENGTH; j < i * LINE_LENGTH + LINE_LENGTH; j++) {
+            if(j >= size) break;
+            printf("|");
+        }
+        printf("\n");
+        for(j = i * LINE_LENGTH; j < i * LINE_LENGTH + LINE_LENGTH; j++) {
+            if(j >= size) break;
+            printf("%c", gen2align[j]);
+        }
+        printf("\n");
+    }
 }

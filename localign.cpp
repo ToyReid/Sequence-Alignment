@@ -1,6 +1,14 @@
 #include "align.hpp"
 using namespace std;
 
-void Local::ComputeScore() {
+void Local::SetupMatrix() {
     
+}
+
+int *Local::MakeTraceback() {
+    return NULL;
+}
+
+void Local::DoAlignment() {
+
 }

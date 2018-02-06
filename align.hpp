@@ -9,6 +9,7 @@
 using namespace std;
 
 #define VINIT 0
+#define LINE_LENGTH 70
 
 class Align {
 protected:
@@ -21,27 +22,38 @@ protected:
     vector<vector<int> > matrix;
     vector<char> gen1;
     vector<char> gen2;
+    vector<char> gen1align;
+    vector<char> gen2align;
 public:
+    Align();
+    ~Align();
     int Max(int a, int b, int c);
     void Init(ifstream&, ifstream&, int, int, int);
     void ReadSequences(ifstream &fasta1, ifstream &fasta2);
     void PrintMatrix();
-    virtual void SetupMatrix()= 0;
-    virtual void ComputeScore()= 0;};
+    void PrintAlignment();
+    virtual void SetupMatrix() = 0;
+    virtual int *MakeTraceback() = 0;
+    virtual void DoAlignment() = 0;
+};
 
 class Global : public Align {
 public:
     void SetupMatrix();
-    void ComputeScore();
+    int *MakeTraceback();
+    void DoAlignment();
 };
 
 class Local : public Align {
 public:
-    virtual void SetupMatrix()= 0;
-    void ComputeScore();
+    void SetupMatrix();
+    int *MakeTraceback();
+    void DoAlignment();
 };
 
 class EndGapFree : public Align {
-    virtual void SetupMatrix()= 0;
-    void ComputeScore();
+public:
+    void SetupMatrix();
+    int *MakeTraceback();
+    void DoAlignment();
 };
