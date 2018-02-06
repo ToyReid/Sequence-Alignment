@@ -3,16 +3,6 @@ using namespace std;
 
 enum Alignment {unknown = 0, global, local, endgapfree};
 
-/* 
-    T[i,j] = Score of optimally aligning
-                first i bases of s with
-                first j bases of t
-
-                 {T[i-1, j-1] + score(s[i], t[j])
-    T[i,j] = max {T[i-1, j] + g
-                 {T[i, j-1] + g
-*/
-
 int main(int argc, char **argv) {
     string file1, file2, align;
     ifstream fasta1, fasta2;
@@ -67,7 +57,12 @@ int main(int argc, char **argv) {
         align.c_str(), file1.c_str(), file2.c_str(), match, mismatch, gap);
 
     if(a == global) {
-        Global g = Global::Global(fasta1, fasta2, match, mismatch, gap);
+        Global g;
+        g.Init(fasta1, fasta2, match, mismatch, gap);
+        g.SetupMatrix();
+        g.PrintMatrix();
+        g.ComputeScore();
+        g.PrintMatrix();
     }
 
     

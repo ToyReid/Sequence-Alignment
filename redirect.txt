@@ -1,0 +1,3 @@
+fasta/test1.fasta
+fasta/test2.fasta
+2 -1 -2
