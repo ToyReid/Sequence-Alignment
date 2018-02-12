@@ -5,25 +5,37 @@
 #include <string>
 #include <cstdio>
 #include <vector>
+#include <algorithm>
 #include <limits>
 using namespace std;
 
 #define VINIT 0
 #define LINE_LENGTH 70
+#define MIN -10000
+
+struct Cell {
+    int val;
+    int i;
+    int j;
+    char g1;
+    char g2;
+    Cell *trace;
+    Cell();
+};
 
 class Align {
 protected:
+    Cell *max;
     int score;
     int match;
     int mismatch;
     int gap;
     int g1size;
     int g2size;
-    vector<vector<int> > matrix;
+    vector<vector<Cell *> > matrix;
+    vector<vector<char> > printMat;
     vector<char> gen1;
     vector<char> gen2;
-    vector<char> gen1align;
-    vector<char> gen2align;
 public:
     Align();
     ~Align();
@@ -33,27 +45,31 @@ public:
     void PrintMatrix();
     void PrintAlignment();
     virtual void SetupMatrix() = 0;
-    virtual int *MakeTraceback() = 0;
+    virtual void MakeTraceback() = 0;
     virtual void DoAlignment() = 0;
+    virtual void FindBest() = 0;
 };
 
 class Global : public Align {
 public:
     void SetupMatrix();
-    int *MakeTraceback();
+    void MakeTraceback();
     void DoAlignment();
+    void FindBest(){};
 };
 
 class Local : public Align {
 public:
     void SetupMatrix();
-    int *MakeTraceback();
+    void MakeTraceback();
     void DoAlignment();
+    void FindBest();
 };
 
 class EndGapFree : public Align {
 public:
     void SetupMatrix();
-    int *MakeTraceback();
+    void MakeTraceback();
+    void FindBest();
     void DoAlignment();
 };

@@ -61,11 +61,24 @@ int main(int argc, char **argv) {
         g.Init(fasta1, fasta2, match, mismatch, gap);
         g.SetupMatrix();
         //g.PrintMatrix();
+        // CALL TRACEBACK
+        g.MakeTraceback();
         g.DoAlignment();
         g.PrintAlignment();
         //g.PrintMatrix();
+    } else if(a == local) {
+        Local l;
+        l.Init(fasta1, fasta2, match, mismatch, gap);
+        l.SetupMatrix();
+        l.MakeTraceback();
+        l.DoAlignment();
+        l.PrintAlignment();
+    } else if(a == endgapfree) {
+        EndGapFree e;
+        e.Init(fasta1, fasta2, match, mismatch, gap);
+        e.SetupMatrix();
+        e.DoAlignment();
     }
-
     
     return 0;
 }

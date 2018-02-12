@@ -1,8 +1,17 @@
 #include "align.hpp"
 using namespace std;
 
+Cell::Cell() {
+    val = 0;
+    trace = nullptr;
+    g1 = '\0';
+    g2 = '\0';
+}
+
 Align::Align(){}
-Align::~Align(){}
+Align::~Align(){
+    // IMPLEMENT
+}
 
 int Align::Max(int m, int gapl, int gapu) {
     int max;
@@ -58,7 +67,7 @@ void Align::PrintMatrix() {
     printf("\n");
     for(i = 0; i < matrix.size(); i++) {
         for(j = 0; j < matrix[0].size(); j++) {
-            printf("%5d", matrix[i][j]);
+            printf("%5d", matrix[i][j]->val);
         }
         printf("\n");
     }
@@ -67,25 +76,36 @@ void Align::PrintMatrix() {
 
 void Align::PrintAlignment() {
     int i, j;
-    int size = gen1align.size();
+    int size = printMat[0].size();
 
-    printf("size = %d\n", gen1align.size() % LINE_LENGTH);
+    //printf("size = %d\n", printMat[0].size());
 
-    for(i = 0; i < (size / LINE_LENGTH) + 1; i++) {
-        for(j = i * LINE_LENGTH; j < i * LINE_LENGTH + LINE_LENGTH; j++) {
-            if(j >= size) break;
-            printf("%c", gen1align[j]);
+    for(i = 0; i < size / LINE_LENGTH + 1; i++) {
+        printf("Genome 1: ");
+        for(j = size - 1 - i * LINE_LENGTH;
+        (j > (size - 1 - i * LINE_LENGTH) - LINE_LENGTH) && (j >= 0);
+        j--) {
+            //printf("1: j = %d\n", j);
+            printf("%c", printMat[0][j]);
         }
         printf("\n");
-        for(j = i * LINE_LENGTH; j < i * LINE_LENGTH + LINE_LENGTH; j++) {
-            if(j >= size) break;
-            printf("|");
+        printf("          ");
+        for(j = size - 1 - i * LINE_LENGTH;
+        (j > (size - 1 - i * LINE_LENGTH) - LINE_LENGTH) && (j >= 0);
+        j--) {
+            //printf("2: j = %d\n", j);
+            printf("%c", printMat[1][j]);
         }
         printf("\n");
-        for(j = i * LINE_LENGTH; j < i * LINE_LENGTH + LINE_LENGTH; j++) {
-            if(j >= size) break;
-            printf("%c", gen2align[j]);
+        printf("Genome 2: ");
+        for(j = size - 1 - i * LINE_LENGTH;
+        (j > (size - 1 - i * LINE_LENGTH) - LINE_LENGTH) && (j >= 0);
+        j--) {
+            //printf("3: j = %d\n", j);
+            printf("%c", printMat[2][j]);
         }
-        printf("\n");
+        printf("\n\n");
     }
+
+    printf("Alignment Score = %d\n", score);
 }

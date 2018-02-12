@@ -1,0 +1,52 @@
+Toy Reid
+CS494 - Bioinformatics
+Homework 2
+* All code is run using C++11 *
+* Run make in the directory to compile the driver file *
+* All questions are answered using the driver executable *
+
+2.  To run, type ./driver and follow the given instructions. In
+    this assignment, you will enter:
+        >global
+        >fasta/fruitfly.fasta
+        >fasta/human.fasta
+        >2 -1 -2
+    Result: -1016
+
+3.  To run, type ./driver and follow the given instructions. In
+    this assignment, you will enter:
+        >local
+        >fasta/fruitfly.fasta
+        >fasta/human.fasta
+        >2 -1 -2
+    Result: 820
+
+4.  To run, type ./driver and follow the given instructions. In
+    this assignment, you will enter:
+        >endgapfree
+        >fasta/human_mito.fasta
+        >fasta/neander_sample.fasta
+        >2 -1 -2
+    Result: 620
+
+5.  Blasting the two sequences gave an alignment with a length of
+    1269. There were also two alignments, one of
+    length 399 with 2 gaps and 293/399 identity matches, and
+    another of length 204 with 0 gaps and 145/204 identity matches.
+    The e-value of the result was 4e-65.
+    The resulting alignment from blast was confusing to me, as I
+    couldn't find the resulting sequences in the given .fasta files.
+    The sequences were also fairly shorter than mine, making me think
+    my local alignment may have been too long.
+
+
+6.  Blastn resulted in a 100% match to
+        Homo sapiens sonic hedgehog (SHH), RefSeqGene on chromosome 7
+        Homo sapiens BAC clone RP11-69O3 from 7, complete sequence
+        Human cosmid clone LL157A05 from 7q36, complete sequence
+    I can only assume that these are all the same sequences with different
+    naming conventions.
+    Blastx's top result was
+    Select seq XP_011514781.1	PREDICTED: sonic hedgehog protein isoform X1 [Homo sapiens]
+    This sequence had two matching ranges. The first had 275/277 matches, the
+    second 88/89. Neither of these ranges had any gaps.
